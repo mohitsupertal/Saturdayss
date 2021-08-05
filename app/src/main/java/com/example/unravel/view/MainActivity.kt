@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         val mainList : ArrayList<TravelData> = ArrayList<TravelData>()
         mainList.add(TravelData(1, "Whats Included", travelList, false))
+        mainList.add(TravelData(2, "Check on day to day needs", travelList, false))
+        mainList.add(TravelData(2, "Related Trips", travelList, false))
 
         rv_travel_list = findViewById(R.id.rv_list)
         mainAdapter = MainAdapter.newInstance()
