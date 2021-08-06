@@ -1,16 +1,19 @@
 package com.example.unravel.view.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.marginLeft
+import androidx.core.view.marginRight
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unravel.R
 
 class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCallback<TravelSubData>)
-    : ListAdapter<TravelSubData, MainSubAdapter.MainSubViewHolder>(diffUtil) {
+    : ListAdapter<TravelSubData, BaseViewHolder<TravelSubData>>(diffUtil) {
 
     companion object{
         private val diffUtil = object : DiffUtil.ItemCallback<TravelSubData>(){
@@ -31,27 +34,50 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainSubViewHolder {
-        return MainSubViewHolder(
-            LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.sub_item, parent, false)
-        )
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<TravelSubData> {
+        Log.d("*** MainSubAdapter ViewType onCreateVH >>>>", ""+viewType)
+         when(viewType){
 
-    override fun onBindViewHolder(holder: MainSubViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
+            1 -> {
+                return TravelCheckVH(
+                    LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.sub_item, parent, false)
+                )
+            }
 
-    class MainSubViewHolder(view : View) : RecyclerView.ViewHolder(view){
+            2 -> {
+                val view = LayoutInflater
+                        .from(parent.context)
+                        .inflate(R.layout.related_items, parent, false)
 
-        private val tvOption : TextView = view.findViewById(R.id.tv_option)
+                view.layoutParams = ViewGroup.LayoutParams((parent.measuredWidth * 0.7).toInt(),ViewGroup.LayoutParams.MATCH_PARENT)
+                return RelateItemVH(view)
+            }
 
-        fun bind(data: TravelSubData){
-
-            tvOption.text = data.name
+            else ->{
+                return throw NullPointerException()
+            }
         }
+
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        Log.d("*** MainSubAdapter ViewType getItemVT >>>>", ""+getItem(position).viewType)
+
+        return when(getItem(position).viewType){
+
+            "travelCheck" -> 1
+
+            "relatedItems" -> 2
+
+            else -> 0
+        }
+    }
+
+    override fun onBindViewHolder(holder: BaseViewHolder<TravelSubData>, position: Int) {
+        holder.bind(getItem(position))
     }
 }
 
-data class TravelSubData(val id : Int, val name : String)
+data class TravelSubData(val id : Int, val name : String = "", val placeName : String = "", val viewType : String)
