@@ -11,7 +11,8 @@
     android:paddingBottom="5dp"
     app:cardCornerRadius="@dimen/material_filled_edittext_font_1_3_padding_bottom"
     android:layout_margin="@dimen/design_bottom_navigation_label_padding"
-    android:elevation="@dimen/material_filled_edittext_font_1_3_padding_top">
+    android:elevation="@dimen/material_filled_edittext_font_1_3_padding_top"
+    app:cardBackgroundColor="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -35,19 +36,20 @@
         android:layout_margin="5dp"
         android:text="munich |"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/tv_days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="4 days"
-        app:layout_constraintEnd_toEndOf="@id/iv_img"
         app:layout_constraintTop_toBottomOf="@id/iv_img"
         app:layout_constraintStart_toEndOf="@id/tv_place"
         app:layout_constraintTop_toTopOf="@id/tv_place"
         app:layout_constraintBottom_toBottomOf="@id/tv_place"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/tv_place_name"
@@ -58,9 +60,9 @@
         android:text="munich |"
         android:gravity="left"
         android:textSize="18sp"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

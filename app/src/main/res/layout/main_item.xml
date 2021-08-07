@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -19,14 +20,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Whats Included"
-            android:textSize="16sp"
+            android:textSize="18sp"
+            android:drawableTint="@color/white"
+            android:drawablePadding="20dp"
             android:padding="10dp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"
+            android:drawableLeft="@drawable/ham_menu" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_sublist"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:overScrollMode="never"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

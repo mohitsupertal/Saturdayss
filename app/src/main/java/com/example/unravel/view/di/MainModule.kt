@@ -2,6 +2,8 @@ package com.example.unravel.view.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.unravel.data.remote.repository.TravelRepository
+import com.example.unravel.data.remote.source.DataService
 import com.example.unravel.view.MainActivity
 import com.example.unravel.view.MainViewModel
 import dagger.Module
@@ -13,7 +15,7 @@ import javax.inject.Singleton
 object MainModule {
 
     @Provides
-    fun providesMainVMFactory() : MainViewModelFactory = MainViewModelFactory()
+    fun providesMainVMFactory(travelService: TravelRepository) : MainViewModelFactory = MainViewModelFactory(travelService)
 
     @Provides
     fun provideMainViewModel(activity: MainActivity, factory: MainViewModelFactory) : MainViewModel =
@@ -21,9 +23,9 @@ object MainModule {
 }
 
 @Singleton
-class MainViewModelFactory @Inject constructor() : ViewModelProvider.NewInstanceFactory() {
+class MainViewModelFactory @Inject constructor(private val travelService: TravelRepository) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel() as T
+        return MainViewModel(travelService) as T
     }
 }

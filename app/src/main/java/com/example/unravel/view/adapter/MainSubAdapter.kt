@@ -2,23 +2,20 @@ package com.example.unravel.view.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.marginLeft
-import androidx.core.view.marginRight
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.unravel.R
 
 class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCallback<TravelSubData>)
     : ListAdapter<TravelSubData, BaseViewHolder<TravelSubData>>(diffUtil) {
 
+    private val typeFactoryImpl = ViewTypeFactoryImpl()
+
     companion object{
         private val diffUtil = object : DiffUtil.ItemCallback<TravelSubData>(){
             override fun areItemsTheSame(oldItem: TravelSubData, newItem: TravelSubData): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
@@ -51,7 +48,7 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
                         .from(parent.context)
                         .inflate(R.layout.related_items, parent, false)
 
-                view.layoutParams = ViewGroup.LayoutParams((parent.measuredWidth * 0.7).toInt(),ViewGroup.LayoutParams.MATCH_PARENT)
+                view.layoutParams = ViewGroup.LayoutParams((parent.measuredWidth * 0.9).toInt(),ViewGroup.LayoutParams.MATCH_PARENT)
                 return RelateItemVH(view)
             }
 
@@ -59,7 +56,6 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
                 return throw NullPointerException()
             }
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -76,8 +72,9 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<TravelSubData>, position: Int) {
+        Log.d("*** MainSubAdapter >>>", ""+getItem(position).name)
         holder.bind(getItem(position))
     }
 }
 
-data class TravelSubData(val id : Int, val name : String = "", val placeName : String = "", val viewType : String)
+data class TravelSubData(val name : String = "", val placeName : String = "", val viewType : String)
