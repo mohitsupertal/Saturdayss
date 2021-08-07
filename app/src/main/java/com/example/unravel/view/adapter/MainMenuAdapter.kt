@@ -1,6 +1,5 @@
 package com.example.unravel.view.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -72,7 +71,6 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<TravelSubData>, position: Int) {
-        Log.d("*** MainSubAdapter >>>", ""+getItem(position).name)
         holder.bind(getItem(position))
     }
 }
