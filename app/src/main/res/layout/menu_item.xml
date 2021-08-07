@@ -16,6 +16,8 @@
         android:padding="10dp"
         android:text="text"
         android:textSize="16sp"
+        android:drawableLeft="@drawable/point"
+        android:drawablePadding="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

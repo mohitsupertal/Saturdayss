@@ -2,15 +2,16 @@ package com.example.unravel.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.unravel.R
-import com.example.unravel.view.adapter.TravelSubData
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rv_travel_list : RecyclerView
     private lateinit var mainAdapter: MainAdapter
     private lateinit var iv_toolimg : ImageView
+    private lateinit var progress : ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -31,13 +33,13 @@ class MainActivity : AppCompatActivity() {
 
         setObserver()
 
+        progress = findViewById(R.id.progress)
         iv_toolimg = findViewById(R.id.iv_toolimg)
         rv_travel_list = findViewById(R.id.rv_list)
 
         Glide.with(this).load(R.drawable.pic_three).into(iv_toolimg)
 
         val onItemClick : (Int, Int, Boolean) -> Unit = {position, id, isExpand ->
-            Log.d("*** onItemClick >>> ", ""+id)
 
             val expand = mainAdapter.getValueAtPosition(position).isExpanded
             mainAdapter.getValueAtPosition(position).isExpanded = !expand
@@ -52,8 +54,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun setObserver(){
 
-        viewModel.strResLiveData.observe(this, Observer {
+        viewModel.travelResLiveData.observe(this, Observer {
             mainAdapter.submitList(it as MutableList<TravelData>)
+        })
+
+        viewModel.progressLiveData.observe(this, Observer {
+            if (it) {
+                progress.visibility = View.VISIBLE
+            }else{
+                progress.visibility = View.GONE
+            }
+        })
+
+      viewModel.errorLiveData.observe(this, Observer {
+           Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+
         })
     }
 }

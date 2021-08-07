@@ -10,9 +10,11 @@ import com.example.unravel.R
 class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCallback<TravelSubData>)
     : ListAdapter<TravelSubData, BaseViewHolder<TravelSubData>>(diffUtil) {
 
-    private val typeFactoryImpl = ViewTypeFactoryImpl()
-
     companion object{
+
+        private const val menuItem = "menuItem"
+        private const val relatedItem = "relatedItems"
+
         private val diffUtil = object : DiffUtil.ItemCallback<TravelSubData>(){
             override fun areItemsTheSame(oldItem: TravelSubData, newItem: TravelSubData): Boolean {
                 return oldItem.name == newItem.name
@@ -32,14 +34,13 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<TravelSubData> {
-        Log.d("*** MainSubAdapter ViewType onCreateVH >>>>", ""+viewType)
          when(viewType){
 
             1 -> {
                 return TravelCheckVH(
                     LayoutInflater
                         .from(parent.context)
-                        .inflate(R.layout.sub_item, parent, false)
+                        .inflate(R.layout.menu_item, parent, false)
                 )
             }
 
@@ -59,13 +60,12 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
     }
 
     override fun getItemViewType(position: Int): Int {
-        Log.d("*** MainSubAdapter ViewType getItemVT >>>>", ""+getItem(position).viewType)
 
         return when(getItem(position).viewType){
 
-            "travelCheck" -> 1
+            menuItem -> 1
 
-            "relatedItems" -> 2
+            relatedItem -> 2
 
             else -> 0
         }
@@ -77,4 +77,4 @@ class MainSubAdapter private constructor(private val diffUtil: DiffUtil.ItemCall
     }
 }
 
-data class TravelSubData(val name : String = "", val placeName : String = "", val viewType : String)
+data class TravelSubData(val name : String = "", val placeName : String = "", val viewType : String, val img : Int = R.drawable.pic_three)

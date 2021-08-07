@@ -6,13 +6,13 @@
     android:layout_marginTop="5dp"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginBottom="10dp"
     android:paddingTop="5dp"
     android:paddingBottom="5dp"
     app:cardCornerRadius="@dimen/material_filled_edittext_font_1_3_padding_bottom"
     android:layout_margin="@dimen/design_bottom_navigation_label_padding"
     android:elevation="@dimen/material_filled_edittext_font_1_3_padding_top"
-    app:cardBackgroundColor="@color/black">
+    android:background="@drawable/et_styling">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +37,8 @@
         android:text="munich |"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="12dp"/>
 
     <TextView
         android:id="@+id/tv_days"
@@ -49,7 +50,8 @@
         app:layout_constraintTop_toTopOf="@id/tv_place"
         app:layout_constraintBottom_toBottomOf="@id/tv_place"
         android:layout_margin="5dp"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/tv_place_name"
@@ -58,9 +60,13 @@
         app:layout_constraintTop_toBottomOf="@id/tv_place"
         android:layout_margin="10dp"
         android:text="munich |"
-        android:gravity="left"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
+        android:gravity="left|center"
+        android:textSize="16sp"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/location"
+        android:drawableTint="@color/white"
+        android:layout_width="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"/>
 

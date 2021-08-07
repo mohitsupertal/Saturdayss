@@ -50,7 +50,7 @@ class MainAdapter private constructor(
         return MainViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.main_item, parent, false)
+                .inflate(R.layout.travel_menu_item_holder, parent, false)
         )
     }
 

@@ -14,7 +14,7 @@ class RelateItemVH(private val view : View)
 
     override fun bind(data: TravelSubData) {
         placeName.text = data.placeName
-        Glide.with(view.context).load(R.drawable.pic_two).into(iv_img)
+        Glide.with(view.context).load(data.img).into(iv_img)
 
     }
 }
