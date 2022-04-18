@@ -25,8 +25,9 @@ import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
-import com.shock.saturdaylifestyle.R;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import saturdaylifestyle.R;
 
 public class MyBottomSheetDialog extends AppCompatDialog {
 
